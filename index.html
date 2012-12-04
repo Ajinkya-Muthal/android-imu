@@ -133,7 +133,7 @@
             v = {x : 0, y : 0, z : 0};
             x = {x : 0, y : 0, z : 0};
             
-            if (acceleration.x > 0.05)
+            if (true)
             {
                 v.x = app.gyro.v.x + (app.gyro.a.x + acceleration.x) * app.gyro.dt / 2;
                 x.x = app.gyro.x.x + app.gyro.dt * (app.gyro.v.x + v.x) / 2;
