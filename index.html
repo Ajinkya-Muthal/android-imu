@@ -27,7 +27,10 @@
     <body>
         <div data-role="page" id="start">
             <div data-role="content" style="text-align: center; margin-top:50px;">
+                <input id="freq" type="number" value="1000"/>
+
                 <div id="navContainer" style="" >App is up</div>
+
             </div>
         </div>
 
@@ -35,7 +38,9 @@
 
     <script type="text/javascript" charset="utf-8">
 
-        var app = {};
+        var app = {
+            watchAcc: null
+        };
     
         //
         // Wait for PhoneGap to load
@@ -51,10 +56,18 @@
         function device_ready()
         {
             //app.alert("ready");
-            var options = { frequency: 1000 };  
-            var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+            $("#freq").change(SetupAccWatch);
         }
 
+        function SetupAccWatch()
+        {
+            var options = { frequency: $("#freq").val() };  
+            if (app.watchAcc != null)
+                navigator.accelerometer.clearWatch(app.watchAcc);
+            
+            app.watchAcc = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+       
+        }
        
         //
         // unusid_app.alert
@@ -77,7 +90,7 @@
         };
 
         function onError() {
-            alert('onError!');
+            $("#navContainer").html("Error");
         };
 
         
