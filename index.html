@@ -27,9 +27,10 @@
     <body>
         <div data-role="page" id="start">
             <div data-role="content" style="text-align: center; margin-top:50px;">
-                <input id="freq" type="number" value="100"/>
+                <input id="freq" type="number" value="10"/>
                 <input id="reset" type="button" value="Reset"/>
-
+                <input id="printHistory" type="button" value="Print History"/>
+                
                 <div id="navContainer" style="" >App is up</div>
                 <div id="status" style="" >Loaded</div>
 
@@ -49,7 +50,8 @@
                 x : {x : 0, y : 0, z : 0},
                 dt : 0,
                 t : 0
-            }
+            },
+            history : []
         };
     
         //
@@ -67,6 +69,8 @@
         {
             //app.alert("ready");
             $("#freq").change(SetupAccWatch);
+            $("#printHistory").click(historyPrint);
+            
             $("#reset").click (function(){
                 app.gyro = {
                     da : {x : 0, y : 0, z : 0},
@@ -76,13 +80,12 @@
                     dt : 0,
                     t : 0
                 }});
-            
+            app.history = [];
             SetupAccWatch();
         }
 
         function SetupAccWatch()
         {
-            
             var options = { frequency: parseInt($("#freq").val()) };  
             if (app.watchAcc != null)
                 navigator.accelerometer.clearWatch(app.watchAcc);
@@ -92,10 +95,6 @@
             
             window.setInterval(asyncDebug, 1000)
         }
-       
-        //
-        // unusid_app.alert
-        //
 
         app.alert = function( message, title )
         {
@@ -111,13 +110,27 @@
             pp += 'Ax = ' + app.gyro.a.x + "</br>";
             pp += 'Vx = ' + app.gyro.v.x + "</br>";
             pp += 'Xx = ' + app.gyro.x.x + "</br>";
-            
+            pp += 'History count = ' + app.history.length + "</br>";
             //            pp = prettyPrint(app.gyro);
             $("#status").html(pp);
         }
-
+        function historyPrint ()
+        {
+            html = "data = [";
+            for (i=0;i<app.history.length;i++)
+            {
+                html += app.history[i][0] + ", " + app.history[i][1] + "; ";
+            }
+            html += "];";
+            console.log(html);
+        }
         function onSuccess(acceleration) {
             app.gyro.dt = acceleration.timestamp - app.gyro.t;
+            
+            app.history.push([acceleration.timestamp, acceleration.x]);
+            return;
+            
+            
             v = {x : 0, y : 0, z : 0};
             x = {x : 0, y : 0, z : 0};
             
