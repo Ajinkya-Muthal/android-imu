@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+/*** fields Validator ***/
+
+.error-text				{ color:#C02020; font-size:90%; list-style:none; }
+.error-highlight		{ color:#ff0000; font-size:110%; font-weight:bold; background-color:#ffff1f; }
+.highlight-err-field	{ border:solid 1px #ff0000 !important; }
+.errors-container		{ margin:0; padding:0; }
+.errors-wrapper			{ margin-left:6px; text-align:left; }
+.required-input-field	{ color:#ff0000; margin:0 1px; font-size:120%; }
+
+.input-group			{ margin-bottom:0; }
+
+.badge					{ background:red; border:1px solid #ffffff;	border-radius:9px; color:#ffffff; font-size:90%; text-shadow:none; font-weight:bold; }
+.opt-row				{ border-bottom:1px	solid #000;	}
+.opt-row-first			{ border-top:1px solid #000; }
+.opt-row-padd			{ padding:8px 0; }
+
+.cb-dat					{ margin-left:30px; }
+.cbox-invite			{ width:18px; height:18px; border-radius:4px; padding:6px; }
+.cbox					{ width:18px; height:18px; border-radius:4px; position:absolute; top:50%; margin-top:-13px; left:8px; padding:6px; }
+.cbox-on				{ background-image:url(images/icons-18-white.png); background-repeat:no-repeat; background-position:-642px 50%; background-color:#4596CE; }
+.cbox-off				{ background-color:#357; }
+.cb-txt					{ font-size:60%; }
+.cd-dst					{ color:#4596CE; font-weight:bold; }
+
+#conflict-cnt .ui-btn-text	{ font-size: 60% !important; }
+
+.conflict				{ font-weight:normal; }
+.conflict-tbl			{ width:100%; }
+.conflict-tbl th		{ font-size:95%; }
+.conf-dat				{ font-size:85%; font-weight:bold; }
+.conf-lbl				{ font-size:75%; }
+
+.conf-hdr				{ font-weight:bold; padding:3px 0; color:#31B6E7; border-bottom:1px solid #31B6E7; font-size:95% }
+.info-border			{ border:1px solid #444; border-radius:9px; }
+#new-contact-info		{ width:100%; }
+.unus-act				{ border:1px solid #666; border-radius:12px; color:#fff; font-size:85%; font-weight:bold; padding:0 4px; background-color:#4596CE; }
+
+.no-display				{ display:none; }
