@@ -72,6 +72,7 @@
             $("#printHistory").click(historyPrint);
             
             $("#reset").click (function(){
+                app.history = [];
                 app.gyro = {
                     da : {x : 0, y : 0, z : 0},
                     a : {x : 0, y : 0, z : 0},
@@ -80,7 +81,7 @@
                     dt : 0,
                     t : 0
                 }});
-            app.history = [];
+            
             SetupAccWatch();
         }
 
