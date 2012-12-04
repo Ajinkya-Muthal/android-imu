@@ -27,7 +27,7 @@
     <body>
         <div data-role="page" id="start">
             <div data-role="content" style="text-align: center; margin-top:50px;">
-                <div id="no-network" style="" >App is up</div>
+                <div id="navContainer" style="" >App is up</div>
             </div>
         </div>
 
@@ -68,10 +68,12 @@
         }
 
         function onSuccess(acceleration) {
-            alert('Acceleration X: ' + acceleration.x + '\n' +
-                'Acceleration Y: ' + acceleration.y + '\n' +
-                'Acceleration Z: ' + acceleration.z + '\n' +
-                'Timestamp: '      + acceleration.timestamp + '\n');
+            str = 'Acceleration X: ' + acceleration.x + '<br>' +
+                'Acceleration Y: ' + acceleration.y + '<br>' +
+                'Acceleration Z: ' + acceleration.z + '<br>' +
+                'Timestamp: '      + acceleration.timestamp;
+            
+            $("#navContainer").html(str);
         };
 
         function onError() {
