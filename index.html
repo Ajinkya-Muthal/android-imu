@@ -78,6 +78,7 @@
             app.watchAcc = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
             $("#status").html("Acc Freq updated to: " + $("#freq").val());
             
+            window.setInterval(asyncDebug, 1000)
         }
        
         //
@@ -90,14 +91,9 @@
             navigator.notification.beep( 1 );
             navigator.notification.alert( message, function(){}, title );
         }
-
-        function onSuccess(acceleration) {
-            app.gyro.dt = acceleration.timestamp - app.gyro.t;
-            v = {x : 0, y : 0, z : 0};
-            
-            v.x = (acceleration.x - app.gyro.a.x) * app.gyro.dt;
-            app.gyro.x.x = app.gyro.x.x + (v.x - app.gyro.v.x) * app.gyro.dt;
-            
+        
+        function asyncDebug ()
+        {
             pp = "";
             pp += 'dt = ' + app.gyro.dt + "</br>";
             pp += 'Ax = ' + app.gyro.a.x + "</br>";
@@ -106,21 +102,22 @@
             
             //            pp = prettyPrint(app.gyro);
             $("#status").html(pp);
+        }
+
+        function onSuccess(acceleration) {
+            app.gyro.dt = acceleration.timestamp - app.gyro.t;
+            v = {x : 0, y : 0, z : 0};
+            x = {x : 0, y : 0, z : 0};
             
+            v.x = app.gyro.v.x + (app.gyro.a.x + acceleration.x) * app.gyro.dt / 2;
+            x.x = app.gyro.x.x + app.gyro.dt * (app.gyro.v.x + v.x) / 2;
             
             // Next Step
             app.gyro.t = acceleration.timestamp;
             app.gyro.a.x = acceleration.x;
             app.gyro.v.x = v.x;
-            
-            //            console.log (app.gyro);
-            //            
-            //            str = 'Acceleration X: ' + acceleration.x + '<br>' +
-            //                'Acceleration Y: ' + acceleration.y + '<br>' +
-            //                'Acceleration Z: ' + acceleration.z + '<br>' +
-            //                'Timestamp: '      + acceleration.timestamp;
-            //            
-            //            $("#navContainer").html(str);
+            app.gyro.x.x = x.x;
+
         };
 
         function onError() {
