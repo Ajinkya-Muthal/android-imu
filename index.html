@@ -30,7 +30,7 @@
                 <input id="freq" type="number" value="1000"/>
 
                 <div id="navContainer" style="" >App is up</div>
-
+                <div id="status" style="" >Loaded</div>
             </div>
         </div>
 
@@ -62,12 +62,14 @@
 
         function SetupAccWatch()
         {
-            var options = { frequency: $("#freq").val() };  
+            
+            var options = { frequency: parseInt($("#freq").val()) };  
             if (app.watchAcc != null)
                 navigator.accelerometer.clearWatch(app.watchAcc);
             
             app.watchAcc = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
-       
+            $("#status").val("Acc Freq updated to: " + $("#freq").val());
+            
         }
        
         //
